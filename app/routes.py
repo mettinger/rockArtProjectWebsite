@@ -45,16 +45,15 @@ def setup(baseDataDirectory):
     htmlDirectory = "./app/static/html/"
     goodDirectory = htmlDirectory + "goodFiles/"
     badDirectory = htmlDirectory + "badFiles/"
-    
+
     os.mkdir(htmlDirectory)
     os.mkdir(goodDirectory)
     os.mkdir(badDirectory)
     allWordFilesGlob = baseDataDirectory + "**/*.docx"
     docFileList = glob.glob(allWordFilesGlob, recursive=True)
-    print(len(docFileList))
+    print("Number of .docx files found: " + str(len(docFileList)))
     for thisFile in docFileList:
         processDoc(thisFile, htmlDirectory)
-    print("Done processing docx files...")
 
 @app.route('/')
 @app.route('/index',methods=['GET', 'POST'])

@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Rock Art Project</title>
+    </head>
+    <body>
+        <h1>Formatted Files</h1>
+        {% for thisFile in goodFiles %}
+        <a href="{{ thisFile[0]}}">{{ thisFile[1] }}</a></br>
+        {% endfor %}
+
+        <h1>Unformatted Files</h1>
+        {% for thisFile in badFiles %}
+        <a href="{{ thisFile[0]}}">{{ thisFile[1] }}</a></br>
+        {% endfor %}
+    </body>
+
+</html>

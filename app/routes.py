@@ -8,11 +8,13 @@ import mammoth
 import re
 from bs4 import BeautifulSoup
 
+# strip out private info, e.g. address, price for artifact
 def stripInfo(soup, regExpList):
     for thisRegExp in regExpList:
         for elem in soup(text=re.compile(thisRegExp)):
             elem.parent.decompose()
 
+# convert .docx to .html, strip private info, and check for annotations
 def processDoc(documentPath, htmlDirectory):
 
     basename = os.path.basename(documentPath)[0:-5].replace(" ","_")
@@ -39,7 +41,7 @@ def processDoc(documentPath, htmlDirectory):
         pass
 
 
-
+# make html directories and convert .docx to .html
 def setup(baseDataDirectory):
 
     htmlDirectory = "./app/static/html/"
@@ -68,6 +70,8 @@ def index():
     goodDirectory = htmlDirectory + "goodFiles/"
     badDirectory = htmlDirectory + "badFiles/"
 
+    # if the .docx files have not been converted to .html, do it now!
+    # to start over, just delete ./app/static/html
     if not os.path.isdir(htmlDirectory):
         setup(baseDataDirectory)
 

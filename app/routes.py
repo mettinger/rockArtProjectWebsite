@@ -27,9 +27,12 @@ def processDoc(documentPath, htmlDirectory):
             html = result.value
 
         soup = BeautifulSoup(html, 'html.parser')
+
         regExpList = [r'Coffman', r'149 Atlantic',r'Swampscott',r'\$\d*\.\d\d'] # strip dollar amounts, etc.
         stripInfo(soup, regExpList)
+
         html = str(soup)
+        # determine if file is annotated and place accordingly
         if "LC Class" in html:
             htmlPath = goodDirectory + basename + '.html'
         else:
@@ -38,7 +41,7 @@ def processDoc(documentPath, htmlDirectory):
         with open(htmlPath,'w') as fp:
             fp.write(html)
     except:
-        pass
+        print("html conversion error: " + documentPath)
 
 
 # make html directories and convert .docx to .html
